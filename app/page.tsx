@@ -30,8 +30,8 @@ export default function Home() {
       title: 'Управление Ликвидностью (TWCF)',
       description: '13-недельная модель денежного потока, стресс-тесты, залоговая база',
       icon: TrendingDown,
-      status: 'coming-soon',
-      link: '#',
+      status: 'available',
+      link: '/liquidity',
     },
     {
       id: 'debt',
