@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -36,9 +36,11 @@ import {
   calculateBankruptcyProbability,
 } from '@/modules/diagnostic/calculations'
 import { formatCurrency, formatPercent, formatNumber } from '@/lib/utils'
+import { getPresetById } from '@/constants/company-presets'
 
 export default function DiagnosticPage() {
   const [step, setStep] = useState<'input' | 'results'>('input')
+  const [presetLoaded, setPresetLoaded] = useState<string | null>(null)
   const [companyInfo, setCompanyInfo] = useState<Partial<CompanyInfo>>({
     legalForm: LegalForm.OOO,
     bankruptcyStatus: BankruptcyStatus.NONE,
@@ -47,6 +49,23 @@ export default function DiagnosticPage() {
   const [income, setIncome] = useState<Partial<IncomeStatement>>({})
   const [cashFlow, setCashFlow] = useState<Partial<CashFlowStatement>>({})
   const [results, setResults] = useState<DiagnosticResults | null>(null)
+
+  // Загрузка пресета при монтировании компонента
+  useEffect(() => {
+    const selectedPresetId = localStorage.getItem('selectedPreset')
+    if (selectedPresetId && !presetLoaded) {
+      const preset = getPresetById(selectedPresetId)
+      if (preset) {
+        setCompanyInfo(preset.companyInfo)
+        setBalance(preset.balance)
+        setIncome(preset.income)
+        setCashFlow(preset.cashFlow)
+        setPresetLoaded(selectedPresetId)
+        // Очищаем localStorage после загрузки
+        localStorage.removeItem('selectedPreset')
+      }
+    }
+  }, [presetLoaded])
 
   const handleCalculate = () => {
     // Создаем тестовые данные для демонстрации
@@ -237,6 +256,25 @@ export default function DiagnosticPage() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Preset Loaded Notification */}
+        {presetLoaded && step === 'input' && (
+          <Card className="mb-6 border-green-200 bg-green-50">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3">
+                <CheckCircle className="h-5 w-5 text-green-600" />
+                <div>
+                  <p className="text-green-900 font-medium">
+                    Данные успешно загружены из пресета
+                  </p>
+                  <p className="text-sm text-green-700">
+                    Все поля заполнены. Вы можете изменить любые значения или сразу выполнить расчет.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {step === 'input' && (
           <div className="space-y-6">
             {/* Company Info */}

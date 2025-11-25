@@ -10,7 +10,8 @@ import {
   DollarSign, 
   FileText, 
   Scale,
-  Calculator
+  Calculator,
+  Building2
 } from 'lucide-react'
 
 export default function Home() {
@@ -107,6 +108,35 @@ export default function Home() {
                     <li>Очередность удовлетворения требований кредиторов</li>
                   </ul>
                 </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Presets Banner */}
+          <Card className="mb-8 border-green-200 bg-green-50">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                      <Building2 className="h-6 w-6 text-green-600" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-green-900 mb-2">
+                      Готовые примеры компаний
+                    </h3>
+                    <p className="text-green-800">
+                      10 пресетов компаний из различных отраслей с реалистичными данными для быстрого тестирования калькулятора
+                    </p>
+                  </div>
+                </div>
+                <Button 
+                  className="bg-green-600 hover:bg-green-700 text-white shrink-0"
+                  onClick={() => window.location.href = '/presets'}
+                >
+                  Смотреть пресеты
+                </Button>
               </div>
             </CardContent>
           </Card>
