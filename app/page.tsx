@@ -11,7 +11,9 @@ import {
   FileText, 
   Scale,
   Calculator,
-  Building2
+  Building2,
+  Activity,
+  Sparkles
 } from 'lucide-react'
 
 export default function Home() {
@@ -112,34 +114,86 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          {/* Presets Banner */}
-          <Card className="mb-8 border-green-200 bg-green-50">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                      <Building2 className="h-6 w-6 text-green-600" />
+          {/* Feature Banners */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {/* Presets Banner */}
+            <Card className="border-green-200 bg-green-50">
+              <CardContent className="pt-6">
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
+                      <Building2 className="h-5 w-5 text-green-600" />
                     </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-green-900 mb-2">
-                      Готовые примеры компаний
+                    <h3 className="text-base font-semibold text-green-900">
+                      Готовые примеры
                     </h3>
-                    <p className="text-green-800">
-                      10 пресетов компаний из различных отраслей с реалистичными данными для быстрого тестирования калькулятора
-                    </p>
                   </div>
+                  <p className="text-sm text-green-800">
+                    10 пресетов компаний из различных отраслей
+                  </p>
+                  <Button 
+                    size="sm"
+                    className="bg-green-600 hover:bg-green-700 text-white w-full"
+                    onClick={() => window.location.href = '/presets'}
+                  >
+                    Смотреть пресеты
+                  </Button>
                 </div>
-                <Button 
-                  className="bg-green-600 hover:bg-green-700 text-white shrink-0"
-                  onClick={() => window.location.href = '/presets'}
-                >
-                  Смотреть пресеты
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            {/* Scenario Comparison Banner */}
+            <Card className="border-purple-200 bg-purple-50">
+              <CardContent className="pt-6">
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100">
+                      <Activity className="h-5 w-5 text-purple-600" />
+                    </div>
+                    <h3 className="text-base font-semibold text-purple-900">
+                      Сценарии
+                    </h3>
+                  </div>
+                  <p className="text-sm text-purple-800">
+                    Сравните Base, Downside и Restructuring
+                  </p>
+                  <Button 
+                    size="sm"
+                    className="bg-purple-600 hover:bg-purple-700 text-white w-full"
+                    onClick={() => window.location.href = '/scenario-comparison'}
+                  >
+                    Сравнить
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Advanced Features Banner */}
+            <Card className="border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50">
+              <CardContent className="pt-6">
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
+                      <Sparkles className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <h3 className="text-base font-semibold text-blue-900">
+                      Новые возможности
+                    </h3>
+                  </div>
+                  <p className="text-sm text-blue-800">
+                    Cash Wall, Payment Waterfall, Collection Matrix
+                  </p>
+                  <Button 
+                    size="sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white w-full"
+                    onClick={() => window.location.href = '/advanced-features'}
+                  >
+                    Подробнее
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Modules Grid */}
           <div className="mb-8">
