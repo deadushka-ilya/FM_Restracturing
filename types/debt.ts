@@ -137,6 +137,12 @@ export interface Debt {
   contractNumber?: string
   isSubordinated: boolean
   canBeRestructured: boolean
+  
+  // Опции реструктуризации (согласно ТЗ Mary)
+  restructuringOption?: 'payAsScheduled' | 'moratorium' | 'restructure'
+  moratoriumWeeks?: number
+  capitalizeInterest?: boolean // PIK (Payment In Kind)
+  accruedPIKInterest?: number // Накопленные капитализированные проценты
 }
 
 /**

@@ -167,3 +167,78 @@ export const ADVANCE_RATES = {
     usedEquipment: 0.50,
   },
 }
+
+/**
+ * Параметры Cash Wall (стены ликвидности)
+ */
+export const CASH_WALL_PARAMS = {
+  operationalDays: 7, // Операционный запас на 7 дней
+  minCashMultiplier: 1.0, // Минимальный остаток = средний дневной расход
+  warningMultiplier: 1.2, // Порог предупреждения = 120% от минимума
+}
+
+/**
+ * Параметры Collection Matrix по умолчанию
+ * Профиль сбора платежей для российского рынка
+ */
+export const DEFAULT_COLLECTION_PROFILES = {
+  b2b: {
+    // B2B - отсрочка платежа
+    week0: 0.10, // 10% предоплата
+    week1: 0.40, // 40% по факту
+    week2: 0.30, // 30% через неделю
+    week3: 0.15, // 15% через 2 недели
+    week4Plus: 0.05, // 5% позже
+  },
+  b2c: {
+    // B2C - розница
+    week0: 0.95, // 95% сразу
+    week1: 0.05, // 5% возвраты
+    week2: 0.00,
+    week3: 0.00,
+    week4Plus: 0.00,
+  },
+  crisis: {
+    // Кризисный профиль (Downside сценарий)
+    week0: 0.05, // Почти нет предоплат
+    week1: 0.20, // Задержка платежей
+    week2: 0.30,
+    week3: 0.25,
+    week4Plus: 0.20, // Много просрочки
+  },
+}
+
+/**
+ * Параметры сценариев (Scenario Multipliers)
+ */
+export const SCENARIO_ADJUSTMENTS = {
+  Base: {
+    revenue: 1.0,
+    costs: 1.0,
+    collections: 1.0,
+    dpoStretch: 0, // Недель растягивания КЗ
+  },
+  Downside: {
+    revenue: 0.7, // -30% выручки
+    costs: 1.0, // Затраты не снижаются автоматически
+    collections: 0.85, // Задержка платежей на 15%
+    dpoStretch: 2, // +2 недели отсрочки поставщикам
+  },
+  Restructuring: {
+    revenue: 0.85, // -15% выручки
+    costs: 0.8, // -20% затрат после оптимизации
+    collections: 0.9, // Задержка на 10%
+    dpoStretch: 1, // +1 неделя отсрочки
+  },
+}
+
+/**
+ * Параметры DPO по типам поставщиков
+ */
+export const DPO_BY_VENDOR_TYPE = {
+  critical: 7, // Критичные (ЖКХ, зарплата) - оплата сразу
+  strategic: 14, // Стратегические поставщики - 2 недели
+  standard: 30, // Стандартные - 30 дней
+  nonCritical: 45, // Неприоритетные - 45 дней
+  stretched: 60, // Растянутые в кризис - 60 дней
+}
