@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { COMPANY_PRESETS, getIndustries } from '@/constants/company-presets'
+import { companyPresets, getIndustries } from '@/constants/company-presets'
 import { formatCurrency } from '@/lib/utils'
 import { ChevronLeft, Building2, TrendingDown, TrendingUp, AlertTriangle, CheckCircle } from 'lucide-react'
 
@@ -15,8 +15,8 @@ export default function PresetsPage() {
   
   const industries = getIndustries()
   const filteredPresets = selectedIndustry === 'all' 
-    ? COMPANY_PRESETS 
-    : COMPANY_PRESETS.filter(p => p.industry === selectedIndustry)
+    ? companyPresets 
+    : companyPresets.filter(p => p.industry === selectedIndustry)
 
   const handleLoadPreset = (presetId: string) => {
     // Сохраняем ID пресета в localStorage для загрузки в модуле диагностики
@@ -74,10 +74,10 @@ export default function PresetsPage() {
               variant={selectedIndustry === 'all' ? 'default' : 'outline'}
               onClick={() => setSelectedIndustry('all')}
             >
-              Все отрасли ({COMPANY_PRESETS.length})
+              Все отрасли ({companyPresets.length})
             </Button>
             {industries.map(industry => {
-              const count = COMPANY_PRESETS.filter(p => p.industry === industry).length
+              const count = companyPresets.filter(p => p.industry === industry).length
               return (
                 <Button
                   key={industry}

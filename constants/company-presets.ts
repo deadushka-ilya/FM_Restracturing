@@ -1317,6 +1317,11 @@ export const companyPresets: CompanyPreset[] = [
 ]
 
 /**
+ * Экспорт в uppercase для совместимости
+ */
+export const COMPANY_PRESETS = companyPresets
+
+/**
  * Получить пресет по ID
  */
 export function getPresetById(id: string): CompanyPreset | undefined {
